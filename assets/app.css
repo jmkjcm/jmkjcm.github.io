@@ -1,4 +1,4 @@
-/* 加密货币商城 · Luxury White Theme · 20261107v59 */
+/* 加密货币商城 · Luxury White Theme · 20261107v60 */
 :root {
   --bg: #ffffff;
   --bg-elevated: #ffffff;
@@ -1736,12 +1736,12 @@ html[data-theme="dark"] .hot-card,
 html[data-theme="dark"] .product-row,
 html[data-theme="dark"] .panel,
 html[data-theme="dark"] .drawer,
-html[data-theme="dark"] .field,
 html[data-theme="dark"] .addr-box,
 html[data-theme="dark"] .net-btn,
 html[data-theme="dark"] .contact-card,
 html[data-theme="dark"] .qty-btn,
-html[data-theme="dark"] .cart-item {
+html[data-theme="dark"] .cart-item,
+html[data-theme="dark"] .pay-steps {
   background: #000000;
   border-color: #2f3336;
   color: #e7e9ea;
@@ -1751,9 +1751,13 @@ html[data-theme="dark"] .hot-cat:hover,
 html[data-theme="dark"] .cat-sheet-item:hover,
 html[data-theme="dark"] .net-btn:hover,
 html[data-theme="dark"] .card-lift:hover,
-html[data-theme="dark"] .card-lift:active {
+html[data-theme="dark"] .card-lift:active,
+html[data-theme="dark"] .contact-card:hover,
+html[data-theme="dark"] .btn-support:hover,
+html[data-theme="dark"] .social:hover {
   background: #16181c;
   border-color: #536471;
+  color: #e7e9ea;
 }
 html[data-theme="dark"] .pill.active,
 html[data-theme="dark"] .hot-cat.active,
@@ -1776,13 +1780,70 @@ html[data-theme="dark"] .toast {
   color: #e7e9ea;
   border-color: #2f3336;
 }
-html[data-theme="dark"] .alert-ok { background: rgba(0, 186, 124, 0.12); color: #00ba7c; }
-html[data-theme="dark"] .alert-err,
-html[data-theme="dark"] .warn { background: rgba(244, 33, 46, 0.1); }
+html[data-theme="dark"] .alert-ok {
+  background: rgba(0, 186, 124, 0.12);
+  color: #00ba7c;
+  border-color: rgba(0, 186, 124, 0.28);
+  border-left-color: #00ba7c;
+}
+html[data-theme="dark"] .alert-err {
+  background: rgba(244, 33, 46, 0.1);
+  color: #f4212e;
+  border-color: rgba(244, 33, 46, 0.28);
+  border-left-color: #f4212e;
+}
+html[data-theme="dark"] .warn {
+  background: rgba(255, 212, 0, 0.08);
+  color: #ffd400;
+  border-color: rgba(255, 212, 0, 0.28);
+  border-left-color: #ffd400;
+}
 html[data-theme="dark"] .site-footer { background: #000000; border-top-color: #2f3336; }
 html[data-theme="dark"] .badge { box-shadow: 0 0 0 2px #000000; }
 html[data-theme="dark"] .pay-step-sep { background: #2f3336; }
-html[data-theme="dark"] .field { color: #e7e9ea; }
+html[data-theme="dark"] .pay-step-num {
+  background: #16181c;
+  border-color: #2f3336;
+  color: #71767b;
+}
+html[data-theme="dark"] .pay-step.active .pay-step-num,
+html[data-theme="dark"] .pay-step.done .pay-step-num {
+  background: #eff3f4;
+  border-color: #eff3f4;
+  color: #0f1419;
+}
+html[data-theme="dark"] .addr-code {
+  background: #000000;
+  border-color: #2f3336;
+  color: #e7e9ea;
+}
+html[data-theme="dark"] .inquire-warn {
+  background: #16181c;
+  border-color: #2f3336;
+  color: #c7c9cc;
+}
+html[data-theme="dark"] .ico-tg {
+  background: rgba(29, 155, 240, 0.12);
+  color: #1d9bf0;
+}
+html[data-theme="dark"] .ico-x {
+  background: #16181c;
+  color: #e7e9ea;
+}
+html[data-theme="dark"] .ico-wx {
+  background: rgba(0, 186, 124, 0.12);
+  color: #00ba7c;
+}
+/* Beat light-theme !important on pay verify input */
+html[data-theme="dark"] .field {
+  background: #000000 !important;
+  border: 1px solid #2f3336 !important;
+  color: #e7e9ea !important;
+}
+html[data-theme="dark"] .field:focus {
+  border-color: #536471 !important;
+  box-shadow: 0 0 0 3px rgba(231, 233, 234, 0.06);
+}
 html[data-theme="dark"] .field::placeholder { color: #71767b; }
 html[data-theme="dark"] .sk-line,
 html[data-theme="dark"] .skeleton-tile,
