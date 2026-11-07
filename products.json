@@ -413,13 +413,13 @@
     {
       "id": "bot-mcap",
       "category": "bot",
-      "name": "商市值机器人",
+      "name": "市值机器人",
       "speed": "咨询",
       "price_usdt": null,
       "hot": false,
-      "desc": "商市值机器人方案定制。价格请直接联系人工客服确认。",
+      "desc": "市值机器人方案定制。价格请直接联系人工客服确认。",
       "order_type": "contact",
-      "logo": "assets/logos/robot.png",
+      "logo": "assets/logos/mcap.png",
       "contact_for_price": true
     },
     {
