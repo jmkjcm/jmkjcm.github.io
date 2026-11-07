@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script>document.documentElement.setAttribute('data-region-pending','1');</script>
+  <style>html[data-region-pending] body{visibility:hidden!important}</style>
+  <script src="assets/region-gate.js?v=20261107v57"></script>
+  <script src="assets/theme.js?v=20261107v57"></script>
+  <script src="assets/i18n.js?v=20261107v57"></script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="加密货币商城 · 加密科技传媒：头像信息收录、热搜和广告、交易所上现货、上合约、Alpha、审计、宣发、开发、其他业务。USDT 定价 / 询价，付款验证或联系人工客服。" />
+  <title data-i18n="title.index">加密货币商城 · 加密科技传媒</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/app.css?v=20261107v57" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap wrap-wide inner">
+      <a href="index.html" class="brand-link">
+        <img src="assets/logo.jpg" alt="加密科技传媒" class="brand-logo brand-logo-company" />
+        <div class="min-w-0">
+          <div class="brand-title">加密科技传媒</div>
+        </div>
+      </a>
+      <div class="header-actions">
+        <button type="button" class="lang-switch" id="btn-lang" aria-label="语言">
+          <span data-lang-mark="zh">中文</span><span class="lang-switch-sep" aria-hidden="true">/</span><span data-lang-mark="en">EN</span>
+        </button>
+        <a href="https://t.me/AJSAASJ" target="_blank" rel="noopener noreferrer" class="btn-support" data-i18n-title="nav.support_title" title="Telegram 人工客服">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          <span class="support-label" data-i18n="nav.support">人工客服</span>
+        </a>
+        <button id="btn-cart" type="button" class="btn-icon" data-i18n-aria="nav.cart" aria-label="购物车">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.7c-.4.5 0 1.3.7 1.3H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
+          <span id="cart-badge" class="badge hidden">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap wrap-wide page-main">
+    <div class="hero">
+      <div class="min-w-0">
+        <h1 data-i18n="hero.title">加密货币商城</h1>
+        <p data-i18n="hero.tagline">购买流程 - 选择业务 - 付USDT - 有任何问题直接联系人工客服</p>
+      </div>
+    </div>
+
+    <div class="tabs-bar">
+      <div class="tabs-fade">
+        <div id="category-tabs" class="tabs-scroll" role="tablist" data-i18n-aria="cat.tabs" aria-label="业务分类"></div>
+      </div>
+      <button type="button" id="category-trigger" class="cat-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="category-sheet">
+        <span class="cat-trigger-copy">
+          <span class="cat-trigger-kicker" data-i18n="cat.current">当前分类</span>
+          <span id="category-current" class="cat-trigger-name">全部</span>
+        </span>
+        <span class="cat-trigger-action"><span data-i18n="cat.all">全部分类</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </span>
+      </button>
+      <div class="hot-cats">
+        <div class="hot-cats-label" data-i18n="hot.label">热门</div>
+        <div id="hot-cats-list" class="hot-cats-list" role="navigation" data-i18n-aria="hot.nav" aria-label="热门分类"></div>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <span id="meta-label"><span class="sk-line w40" style="display:inline-block;width:120px;height:10px;vertical-align:middle;border-radius:6px;background:rgba(0,0,0,0.06)"></span></span>
+    </div>
+
+    <div id="product-grid" class="product-list">
+      <div class="skeleton-wrap" aria-hidden="true">
+        <div class="skeleton-hot">
+          <div class="skeleton-tile"></div>
+          <div class="skeleton-tile"></div>
+          <div class="skeleton-tile"></div>
+          <div class="skeleton-tile"></div>
+        </div>
+        <div class="skeleton-row"><div class="sk-circle"></div><div class="sk-lines"><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="sk-btns"><div class="sk-btn"></div><div class="sk-btn"></div></div></div>
+        <div class="skeleton-row"><div class="sk-circle"></div><div class="sk-lines"><div class="sk-line w60"></div><div class="sk-line w40"></div></div><div class="sk-btns"><div class="sk-btn"></div><div class="sk-btn"></div></div></div>
+        <div class="skeleton-row"><div class="sk-circle"></div><div class="sk-lines"><div class="sk-line w80"></div><div class="sk-line w40"></div></div><div class="sk-btns"><div class="sk-btn"></div><div class="sk-btn"></div></div></div>
+      </div>
+    </div>
+    <p id="empty-hint" class="empty-state hidden" data-i18n="empty.cat">该分类暂无服务</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap wrap-wide inner">
+      <div class="footer-brand">加密科技传媒有限公司</div>
+      <div class="socials" data-i18n-aria="nav.contacts" aria-label="联系方式">
+        <a href="https://x.com/jmkjlin" target="_blank" rel="noopener noreferrer" class="social" title="X @jmkjlin" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.849L1.254 2.25H8.08l4.259 5.672L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+        </a>
+        <a href="https://t.me/JMKJCM" target="_blank" rel="noopener noreferrer" class="social" title="Telegram @JMKJCM" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <button type="button" id="btn-footer-wechat" class="social" data-i18n-title="wx.footer_title" data-i18n-aria="wx.aria" title="微信 The666TH（点击复制）" aria-label="微信">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.934 1.942-6.515 1.827-1.618 4.37-2.225 6.652-1.732-.857-3.766-4.447-6.595-8.505-6.595zm-3.57 5.622a1.042 1.042 0 0 1 0-2.083 1.042 1.042 0 0 1 0 2.083zm6.978 0a1.042 1.042 0 1 1 0-2.083 1.042 1.042 0 0 1 0 2.083zM24 14.3c0-3.405-3.272-6.168-7.288-6.168-4.017 0-7.29 2.763-7.29 6.168s3.273 6.168 7.29 6.168a8.69 8.69 0 0 0 2.446-.352.74.74 0 0 1 .613.083l1.632.955a.28.28 0 0 0 .143.046c.138 0 .25-.112.25-.25 0-.06-.025-.12-.041-.18l-.334-1.27a.506.506 0 0 1 .182-.57C22.994 17.9 24 16.23 24 14.3zm-9.943-1.486a.893.893 0 1 1 0-1.786.893.893 0 0 1 0 1.786zm5.041 0a.893.893 0 1 1 0-1.786.893.893 0 0 1 0 1.786z"/></svg>
+        </button>
+      </div>
+      <p style="margin:0 0 8px"><a href="terms.html" data-i18n="nav.terms">服务条款</a></p>
+      <p style="margin:0;color:#666666">© <span id="year"></span> 加密科技传媒</p>
+    </div>
+  </footer>
+
+  <div id="cart-overlay" class="overlay"></div>
+  <aside id="cart-drawer" class="drawer" data-i18n-aria="cart.title" aria-label="购物车">
+    <div class="drawer-head">
+      <span data-i18n="cart.title">购物车</span>
+      <button id="btn-close-cart" type="button" class="drawer-close" data-i18n-aria="nav.close" aria-label="关闭">✕</button>
+    </div>
+    <div id="cart-items" class="drawer-body"></div>
+    <div class="drawer-foot">
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <span style="color:var(--text-muted)" data-i18n="cart.total">合计</span>
+        <span id="cart-total" class="price" style="font-size:16px">0 USDT</span>
+      </div>
+      <button id="btn-checkout" type="button" class="btn btn-primary" style="width:100%;border-radius:12px;min-height:48px;font-size:15px" data-i18n="cart.checkout">去付款</button>
+      <button id="btn-clear-cart" type="button" style="font-size:12px;color:var(--text-muted);padding:6px" data-i18n="cart.clear">清空</button>
+    </div>
+  </aside>
+
+  <div id="category-overlay" class="cat-sheet-overlay"></div>
+  <div id="category-sheet" class="cat-sheet" role="dialog" aria-modal="true" aria-labelledby="category-sheet-title" aria-hidden="true">
+    <div class="cat-sheet-panel">
+      <div class="cat-sheet-handle" aria-hidden="true"></div>
+      <div class="cat-sheet-head">
+        <h2 id="category-sheet-title" data-i18n="cat.all">全部分类</h2>
+        <button type="button" id="category-sheet-close" class="drawer-close" data-i18n-aria="nav.close" aria-label="关闭">✕</button>
+      </div>
+      <div id="category-sheet-list" class="cat-sheet-list" role="listbox" data-i18n-aria="cat.pick" aria-label="选择业务分类"></div>
+    </div>
+  </div>
+
+  <div id="toast-root"></div>
+
+  <script src="assets/verify.js?v=20261107v57"></script>
+  <script>
+  function tr(key, vars) {
+    return (window.CryptoMallI18n && CryptoMallI18n.t) ? CryptoMallI18n.t(key, vars) : (typeof vars === 'string' ? vars : key);
+  }
+  function pn(item) {
+    if (!item) return '';
+    return tr('prod.' + item.id, item.name || item.id);
+  }
+  const CART_KEY = 'crypto_mall_cart_v3';
+  const CONTACT_TG = 'https://t.me/AJSAASJ';
+  let CATALOG = { categories: [], products: [] };
+  let cart = loadCart();
+  let activeCategory = 'all';
+
+  function loadCart() {
+    try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch { return []; }
+  }
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateCartUI();
+  }
+  function toast(msg) {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    document.getElementById('toast-root').appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  async function copyText(t, okMsg) {
+    try { await navigator.clipboard.writeText(t); toast(okMsg || tr('toast.copied')); }
+    catch {
+      const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove(); toast(okMsg || tr('toast.copied'));
+    }
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function catName(id) {
+    if (!id) return '';
+    if (id === 'all') return tr('cat.all_items');
+    const c = CATALOG.categories.find(x => x.id === id);
+    return tr('cat.' + id, c ? c.name : id);
+  }
+
+  function isContactPrice(p) {
+    if (!p) return false;
+    if (p.contact_for_price === true || p.order_type === 'contact') return true;
+    const v = p.price_usdt;
+    return v === null || v === undefined || v === '?' || v === '';
+  }
+  function unitPrice(p) {
+    if (isContactPrice(p)) return null;
+    const n = Number(p.price_usdt);
+    return Number.isFinite(n) ? n : null;
+  }
+  function formatPrice(p) {
+    if (isContactPrice(p) || unitPrice(p) === null) return '888 USDT';
+    return unitPrice(p) + ' USDT';
+  }
+  function formatPriceRaw(price, contact) {
+    if (contact || price === null || price === undefined || price === '?' || price === '') return '888 USDT';
+    const n = Number(price);
+    if (!Number.isFinite(n)) return '888 USDT';
+    return n + ' USDT';
+  }
+
+  function goPay(items) {
+    if (!items.length) { toast(tr('toast.select')); return; }
+    const mapped = items.map(i => {
+      const contact = !!(i.contact_for_price || i.price_usdt === null || i.price_usdt === '?' || i.price_usdt === undefined || i.price_usdt === '');
+      return {
+        id: i.id,
+        name: i.name,
+        qty: i.qty || 1,
+        price_usdt: contact ? null : Number(i.price_usdt),
+        contact_for_price: contact,
+        logo: i.logo || '',
+        category: i.category || ''
+      };
+    });
+    const hasContact = mapped.some(i => i.contact_for_price);
+    const numericTotal = mapped.reduce((s, i) => {
+      if (i.contact_for_price) return s;
+      return s + (Number(i.price_usdt) || 0) * (i.qty || 1);
+    }, 0);
+    const order = {
+      orderId: CryptoMallPay.makeOrderId(),
+      createdAt: Date.now(),
+      items: mapped,
+      amountUsdt: hasContact && numericTotal === 0 ? null : numericTotal,
+      contactForPrice: hasContact,
+      amountDisplay: (hasContact && numericTotal === 0) ? '888 USDT' : (hasContact ? (numericTotal + ' + 888 USDT') : (numericTotal + ' USDT')),
+    };
+    CryptoMallPay.savePending(order);
+    if (hasContact && numericTotal === 0) {
+      const ids = mapped.map(i => i.id).filter(Boolean).join(',');
+      location.href = 'inquire.html?order=' + encodeURIComponent(order.orderId) + (ids ? '&id=' + encodeURIComponent(ids) : '');
+      return;
+    }
+    if (hasContact && numericTotal > 0) {
+      const priced = mapped.filter(i => !i.contact_for_price);
+      const payOrder = Object.assign({}, order, {
+        items: priced,
+        contactForPrice: false,
+        amountUsdt: numericTotal,
+        amountDisplay: numericTotal + ' USDT'
+      });
+      CryptoMallPay.savePending(payOrder);
+      location.href = 'pay.html?order=' + encodeURIComponent(payOrder.orderId);
+      return;
+    }
+    location.href = 'pay.html?order=' + encodeURIComponent(order.orderId);
+  }
+
+  function buyOne(id) {
+    const p = CATALOG.products.find(x => x.id === id);
+    if (!p) return;
+    goPay([{
+      id: p.id,
+      name: p.name,
+      qty: 1,
+      logo: p.logo,
+      price_usdt: isContactPrice(p) ? null : unitPrice(p),
+      contact_for_price: isContactPrice(p),
+      category: p.category || ''
+    }]);
+  }
+
+  function addToCart(id) {
+    const p = CATALOG.products.find(x => x.id === id);
+    if (!p) return;
+    if (isContactPrice(p)) {
+      toast(tr('toast.need_inquire'));
+      return;
+    }
+    const price = unitPrice(p);
+    const exist = cart.find(x => x.id === id);
+    if (exist) exist.qty += 1;
+    else cart.push({ id: p.id, name: p.name, price_usdt: price, contact_for_price: false, logo: p.logo, qty: 1 });
+    saveCart();
+    toast(tr('toast.added'));
+  }
+
+  const HOT_CATS = [
+    { id: 'avatar', name: '头像信息收录' },
+    { id: 'listing_spot', name: '交易所上线' },
+    { id: 'listing_spot_futures', name: '上合约' },
+    { id: 'alpha', name: 'Alpha' }
+  ];
+  function categoryList() {
+    const cats = [...CATALOG.categories].sort((a,b)=>a.order-b.order).map(c => ({
+      id: c.id,
+      name: tr('cat.' + c.id, c.name)
+    }));
+    return [{ id: 'all', name: tr('cat.all_items') }, ...cats];
+  }
+  function currentCategoryName() {
+    const hot = HOT_CATS.find(x => x.id === activeCategory);
+    if (hot) return tr('hotcat.' + hot.id, hot.name);
+    const hit = categoryList().find(x => x.id === activeCategory);
+    return hit ? hit.name : tr('cat.all_items');
+  }
+  function renderTabs() {
+    const tabs = categoryList();
+    document.getElementById('category-tabs').innerHTML = tabs.map(t => `
+      <button type="button" data-cat="${t.id}" role="tab" aria-selected="${activeCategory===t.id}"
+        class="pill${activeCategory===t.id?' active':''}">${escapeHtml(t.name)}</button>`).join('');
+    const cur = document.getElementById('category-current');
+    if (cur) cur.textContent = currentCategoryName();
+    const list = document.getElementById('category-sheet-list');
+    if (list) {
+      list.innerHTML = tabs.map(t => `
+        <button type="button" role="option" data-cat-pick="${t.id}" aria-selected="${activeCategory===t.id}"
+          class="cat-sheet-item${activeCategory===t.id?' active':''}">${escapeHtml(t.name)}</button>`).join('');
+    }
+    const hotList = document.getElementById('hot-cats-list');
+    if (hotList) {
+      hotList.innerHTML = HOT_CATS.map(c => `
+        <button type="button" data-hot-cat="${c.id}" class="hot-cat${activeCategory===c.id?' active':''}">${escapeHtml(tr('hotcat.' + c.id, c.name))}</button>
+      `).join('');
+    }
+  }
+  function openCategorySheet() {
+    document.getElementById('category-overlay').classList.add('open');
+    const sheet = document.getElementById('category-sheet');
+    sheet.classList.add('open');
+    sheet.setAttribute('aria-hidden', 'false');
+    document.getElementById('category-trigger').setAttribute('aria-expanded', 'true');
+    document.body.classList.add('cat-sheet-open');
+  }
+  function closeCategorySheet() {
+    document.getElementById('category-overlay').classList.remove('open');
+    const sheet = document.getElementById('category-sheet');
+    sheet.classList.remove('open');
+    sheet.setAttribute('aria-hidden', 'true');
+    document.getElementById('category-trigger').setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('cat-sheet-open');
+  }
+
+  function productRowHtml(p, compact) {
+    const priceLabel = formatPrice(p);
+    const buyLabel = isContactPrice(p) ? tr('btn.inquire') : tr('btn.buy');
+    if (compact) {
+      return `
+      <article class="hot-card">
+        <div class="hot-card-top">
+          <span class="logo-circle">
+            <img src="${escapeHtml(p.logo || 'assets/logo.jpg')}" alt="" loading="eager" decoding="async" fetchpriority="high" onerror="this.src='assets/logo.jpg'" />
+          </span>
+          <div class="hot-card-info">
+            <div class="row-name">
+              <span class="name">${escapeHtml(pn(p))}</span>
+            </div>
+            <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(p.speed) : ''}</div>
+          </div>
+        </div>
+        <div class="hot-card-bottom">
+          <div class="price">${priceLabel}</div>
+          <div class="action-btns">
+            <button type="button" data-buy="${p.id}" class="btn btn-primary btn-xs btn-buy" aria-label="${buyLabel}">${buyLabel}</button>
+          </div>
+        </div>
+      </article>`;
+    }
+    return `
+      <article class="product-row">
+        <span class="logo-circle">
+          <img src="${escapeHtml(p.logo || 'assets/logo.jpg')}" alt="" loading="eager" decoding="async" fetchpriority="high" onerror="this.src='assets/logo.jpg'" />
+        </span>
+        <div class="row-main">
+          <div class="row-name">
+            <span class="name">${escapeHtml(pn(p))}</span>
+            ${p.hot ? '<span class="hot-tag">' + escapeHtml(tr('tag.hot')) + '</span>' : ''}
+          </div>
+          <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(p.speed) : ''}</div>
+        </div>
+        <div class="row-actions">
+          <div class="price">${priceLabel}</div>
+          <div class="action-btns">
+            <button type="button" data-cart="${p.id}" class="btn btn-ghost btn-xs btn-add" aria-label="${escapeHtml(tr('btn.add_aria'))}">${escapeHtml(tr('btn.add'))}</button>
+            <button type="button" data-buy="${p.id}" class="btn btn-primary btn-xs btn-buy" aria-label="${buyLabel}">${buyLabel}</button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function updateMeta(visibleCount) {
+    const meta = document.getElementById('meta-label');
+    if (!meta) return;
+    const suffix = tr('meta.suffix');
+    if (activeCategory === 'all') {
+      meta.innerHTML = escapeHtml(tr('meta.all', { n: CATALOG.products.length, suffix })).replace(String(CATALOG.products.length), `<span id="product-count">${CATALOG.products.length}</span>`);
+      return;
+    }
+    const label = tr('meta.cat', { name: currentCategoryName(), n: visibleCount, suffix });
+    meta.innerHTML = escapeHtml(label).replace(String(visibleCount), `<span id="product-count">${visibleCount}</span>`);
+  }
+  function categoryCloseHtml(count) {
+    if (count >= 6) return '';
+    return `<div class="cat-close">
+      <p>${escapeHtml(tr('close.note', { n: count }))}</p>
+      <a href="${CONTACT_TG}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-xs">${escapeHtml(tr('close.cta'))}</a>
+    </div>`;
+  }
+  function renderProducts() {
+    const grid = document.getElementById('product-grid');
+    const all = CATALOG.products;
+    if (activeCategory === 'all') {
+      const hot = all.filter(p => p.hot);
+      const rest = all.filter(p => !p.hot);
+      document.getElementById('empty-hint').classList.toggle('hidden', all.length > 0);
+      const hotBlock = hot.length ? `
+        <section class="hot-section" aria-label="${escapeHtml(tr('section.hot'))}">
+          <div class="section-title">${escapeHtml(tr('section.hot'))}</div>
+          <div class="hot-grid">${hot.map(p => productRowHtml(p, true)).join('')}</div>
+        </section>` : '';
+      const restBlock = rest.length ? `
+        <section class="rest-section" aria-label="${escapeHtml(tr('section.all'))}">
+          <div class="section-title section-title-muted">${escapeHtml(tr('section.more'))}</div>
+          <div class="product-list">${rest.map(p => productRowHtml(p, false)).join('')}</div>
+        </section>` : '';
+      grid.className = 'catalog-view';
+      grid.innerHTML = hotBlock + restBlock;
+      document.body.classList.remove('page-short');
+      updateMeta(all.length);
+      return;
+    }
+    const list = all.filter(p => p.category === activeCategory);
+    document.getElementById('empty-hint').classList.toggle('hidden', list.length > 0);
+    grid.className = 'product-list';
+    grid.innerHTML = list.map(p => productRowHtml(p, false)).join('') + categoryCloseHtml(list.length);
+    document.body.classList.toggle('page-short', list.length < 6);
+    updateMeta(list.length);
+  }
+
+  function updateCartUI() {
+    const badge = document.getElementById('cart-badge');
+    const count = cart.reduce((s,i)=>s+i.qty,0);
+    if (count > 0) { badge.textContent = count > 99 ? '99+' : String(count); badge.classList.remove('hidden'); }
+    else badge.classList.add('hidden');
+    const wrap = document.getElementById('cart-items');
+    if (!cart.length) {
+      wrap.innerHTML = '<div class="empty-state" style="padding:48px 12px">' + tr('empty.cart') + '<br><span style="font-size:12px;opacity:.7">' + tr('empty.cart_hint') + '</span></div>';
+    } else {
+      wrap.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <span class="logo-circle" style="width:40px;height:40px"><img src="${escapeHtml(i.logo||'assets/logo.jpg')}" onerror="this.src='assets/logo.jpg'" /></span>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(pn(i))}</div>
+            <div style="font-size:12px;color:var(--price);margin-top:2px">${formatPriceRaw(i.price_usdt, i.contact_for_price)} × ${i.qty}</div>
+          </div>
+          <div class="qty-ctrl">
+            <button type="button" data-qty="${i.id}" data-d="-1" class="qty-btn" aria-label="${escapeHtml(tr('cart.minus'))}">−</button>
+            <span style="width:20px;text-align:center;font-size:13px">${i.qty}</span>
+            <button type="button" data-qty="${i.id}" data-d="1" class="qty-btn" aria-label="${escapeHtml(tr('cart.plus'))}">+</button>
+          </div>
+        </div>`).join('');
+    }
+    const sum = cart.reduce((s,i)=>{
+      if (i.contact_for_price || i.price_usdt === null || i.price_usdt === undefined) return s;
+      return s + (Number(i.price_usdt)||0) * i.qty;
+    }, 0);
+    const hasQ = cart.some(i => i.contact_for_price || i.price_usdt === null || i.price_usdt === undefined);
+    let totalLabel;
+    if (!cart.length) totalLabel = '0 USDT';
+    else if (hasQ && sum === 0) totalLabel = '888 USDT';
+    else if (hasQ) totalLabel = sum + ' + 888 USDT';
+    else totalLabel = sum + ' USDT';
+    document.getElementById('cart-total').textContent = totalLabel;
+  }
+
+  function openCart() {
+    document.getElementById('cart-drawer').classList.add('open');
+    document.getElementById('cart-overlay').classList.add('open');
+  }
+  function closeCart() {
+    document.getElementById('cart-drawer').classList.remove('open');
+    document.getElementById('cart-overlay').classList.remove('open');
+  }
+
+  async function init() {
+    document.getElementById('year').textContent = new Date().getFullYear();
+    CATALOG = await (await fetch('products.json?v=20261107v57')).json();
+    renderTabs();
+    renderProducts();
+    updateCartUI();
+
+    document.getElementById('category-tabs').addEventListener('click', e => {
+      const btn = e.target.closest('[data-cat]');
+      if (!btn) return;
+      activeCategory = btn.dataset.cat;
+      renderTabs(); renderProducts();
+    });
+    document.getElementById('category-trigger').addEventListener('click', openCategorySheet);
+    document.getElementById('category-overlay').addEventListener('click', closeCategorySheet);
+    document.getElementById('category-sheet-close').addEventListener('click', closeCategorySheet);
+    document.getElementById('category-sheet-list').addEventListener('click', e => {
+      const btn = e.target.closest('[data-cat-pick]');
+      if (!btn) return;
+      activeCategory = btn.dataset.catPick;
+      renderTabs();
+      renderProducts();
+      closeCategorySheet();
+    });
+    document.getElementById('hot-cats-list').addEventListener('click', e => {
+      const btn = e.target.closest('[data-hot-cat]');
+      if (!btn) return;
+      activeCategory = btn.dataset.hotCat;
+      renderTabs();
+      renderProducts();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeCategorySheet();
+    });
+    document.getElementById('product-grid').addEventListener('click', e => {
+      const buy = e.target.closest('[data-buy]');
+      if (buy) { buyOne(buy.dataset.buy); return; }
+      const add = e.target.closest('[data-cart]');
+      if (add) addToCart(add.dataset.cart);
+    });
+    document.getElementById('cart-items').addEventListener('click', e => {
+      const q = e.target.closest('[data-qty]');
+      if (!q) return;
+      const item = cart.find(x => x.id === q.dataset.qty);
+      if (!item) return;
+      item.qty += Number(q.dataset.d);
+      if (item.qty <= 0) cart = cart.filter(x => x.id !== item.id);
+      saveCart();
+    });
+    document.getElementById('btn-cart').onclick = openCart;
+    document.getElementById('btn-close-cart').onclick = closeCart;
+    document.getElementById('cart-overlay').onclick = closeCart;
+    document.getElementById('btn-clear-cart').onclick = () => { cart = []; saveCart(); toast(tr('toast.cleared')); };
+    document.getElementById('btn-checkout').onclick = () => {
+      if (!cart.length) { toast(tr('toast.cart_empty')); return; }
+      goPay(cart);
+    };
+    document.getElementById('btn-footer-wechat').onclick = () => copyText('The666TH', tr('toast.wechat'));
+    setupHotCatsCollapse();
+  }
+  function setupHotCatsCollapse() {
+    const bar = document.querySelector('.tabs-bar');
+    if (!bar) return;
+    const sync = () => {
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      bar.classList.toggle('is-collapsed', y > 8);
+    };
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+  }
+  document.addEventListener('mall-langchange', function () {
+    if (CATALOG && CATALOG.products) {
+      renderTabs();
+      renderProducts();
+      updateCartUI();
+    }
+    if (window.CryptoMallI18n) CryptoMallI18n.apply();
+  });
+  init().catch(() => toast(tr('toast.catalog_fail')));
+
+  </script>
+</body>
+</html>

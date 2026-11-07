@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script>document.documentElement.setAttribute('data-region-pending','1');</script>
+  <style>html[data-region-pending] body{visibility:hidden!important}</style>
+  <script src="assets/region-gate.js?v=20261107v57"></script>
+  <script src="assets/theme.js?v=20261107v57"></script>
+  <script src="assets/i18n.js?v=20261107v57"></script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title data-i18n="title.pay">付款验证 · 加密货币商城</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/app.css?v=20261107v57" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap inner" style="max-width:520px">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <a href="index.html" class="back-link" data-i18n="nav.back">← 返回</a>
+        <div class="page-title" data-i18n="pay.page">付款 · 链上验证</div>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="lang-switch" id="btn-lang" aria-label="语言">
+          <span data-lang-mark="zh">中文</span><span class="lang-switch-sep" aria-hidden="true">/</span><span data-lang-mark="en">EN</span>
+        </button>
+        <a href="https://t.me/AJSAASJ" target="_blank" rel="noopener noreferrer" class="btn-support" data-i18n-title="nav.support_title" title="Telegram 人工客服">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          <span class="support-label" data-i18n="nav.support">人工客服</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap page-main" style="max-width:520px;padding-top:16px">
+    <nav class="pay-steps" data-i18n-aria="pay.steps" aria-label="付款步骤">
+      <div class="pay-step active" data-step="1">
+        <span class="pay-step-num">1</span>
+        <span class="pay-step-label" data-i18n="pay.step1">确认订单</span>
+      </div>
+      <span class="pay-step-sep" aria-hidden="true"></span>
+      <div class="pay-step" data-step="2">
+        <span class="pay-step-num">2</span>
+        <span class="pay-step-label" data-i18n="pay.step2">转账 USDT</span>
+      </div>
+      <span class="pay-step-sep" aria-hidden="true"></span>
+      <div class="pay-step" data-step="3">
+        <span class="pay-step-num">3</span>
+        <span class="pay-step-label" data-i18n="pay.step3">链上验证</span>
+      </div>
+    </nav>
+
+    <div class="panel">
+      <div class="pay-amount-hero">
+        <div class="pay-amount-label" data-i18n="pay.amount">应付金额</div>
+        <div id="amount" class="pay-amount-value">… USDT</div>
+        <div class="pay-amount-sub" data-i18n="pay.amount_sub">金额以订单为准</div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+        <div class="label" data-i18n="pay.oid">订单号</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <code id="order-id" class="mono" style="color:var(--mint);font-size:13px;word-break:break-all">—</code>
+          <button type="button" id="btn-copy-oid" class="btn btn-ghost btn-sm shrink-0" data-i18n="pay.copy">复制</button>
+        </div>
+        <div id="order-items" style="margin-top:12px;display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-transfer">
+      <div class="panel-title" data-i18n="pay.transfer_title">选择网络并转账</div>
+      <p class="hint" data-i18n="pay.transfer_hint">请自主选择转账网络。默认 BSC（BEP20），也可选以太坊、X Layer。请确保钱包网络与所选一致。</p>
+      <div class="net-grid" role="group" data-i18n-aria="pay.net_group" aria-label="选择 USDT 网络">
+        <button type="button" data-net="BEP20" class="net-btn active" aria-pressed="true" data-i18n="net.BEP20">BSC（BEP20）</button>
+        <button type="button" data-net="ERC20" class="net-btn" aria-pressed="false" data-i18n="net.ERC20">以太坊（ERC20）</button>
+        <button type="button" data-net="XLAYER" class="net-btn" aria-pressed="false" data-i18n="net.XLAYER">X Layer</button>
+      </div>
+      <div>
+        <div class="label"><span data-i18n="pay.addr_prefix">USDT 收款地址（</span><span id="net-label">BSC（BEP20）</span><span data-i18n="pay.addr_suffix">）</span></div>
+        <div class="addr-box">
+          <code id="pay-addr" class="addr-code mono"></code>
+          <button type="button" id="btn-copy-addr" class="btn btn-primary btn-sm shrink-0" style="min-width:72px" data-i18n="pay.copy_addr">复制地址</button>
+        </div>
+        <p id="net-warn" class="warn hidden"></p>
+      </div>
+      <p class="warn"><span data-i18n="pay.warn_before">请向上述地址转入</span> <strong id="hint-amt">… USDT</strong><span data-i18n="pay.warn_after">。转错网络或金额不足将无法通过验证。</span></p>
+    </div>
+
+    <div class="panel" id="panel-verify">
+      <div class="panel-title" data-i18n="pay.verify_title">粘贴交易哈希并验证</div>
+      <p class="hint" data-i18n="pay.verify_hint">付款成功后，在钱包或区块浏览器复制 Tx Hash，粘贴到下方。验证通过后才会显示客服联系方式。</p>
+      <input id="tx-hash" type="text" placeholder="0x… 交易哈希" data-i18n-placeholder="pay.tx_ph" class="field" autocomplete="off" spellcheck="false" />
+      <div id="err" class="alert-err hidden" style="margin-top:10px"></div>
+      <div id="ok" class="alert-ok hidden" style="margin-top:10px"></div>
+      <button id="btn-verify" type="button" class="btn btn-primary" style="width:100%;margin-top:12px;padding:14px;border-radius:12px;font-size:15px">
+        <span id="btn-label" data-i18n="pay.verify">验证付款</span>
+        <svg id="btn-spin" class="spin hidden" width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="3"/></svg>
+      </button>
+      <p style="margin:10px 0 0;font-size:11px;color:var(--text-muted);text-align:center" data-i18n="pay.verify_note">不会因点击「我已付款」解锁 · 必须链上验证成功</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap inner" style="max-width:520px">
+      <div class="footer-brand">加密科技传媒有限公司</div>
+      <p style="margin:0"><a href="terms.html" data-i18n="nav.terms">服务条款</a></p>
+    </div>
+  </footer>
+
+  <div id="toast-root"></div>
+  <script src="assets/verify.js?v=20261107v57"></script>
+  <script>
+  function tr(key, vars) {
+    return (window.CryptoMallI18n && CryptoMallI18n.t) ? CryptoMallI18n.t(key, vars) : (typeof vars === 'string' ? vars : key);
+  }
+  function pn(item) {
+    if (!item) return '';
+    return tr('prod.' + item.id, item.name || item.id);
+  }
+  function te(msg) {
+    return (window.CryptoMallI18n && CryptoMallI18n.error) ? CryptoMallI18n.error(msg) : (msg || tr('pay.fail'));
+  }
+  let network = 'BEP20';
+  let order = null;
+  const CONTACT_TG = 'https://t.me/AJSAASJ';
+  const CONTACT_X = 'https://x.com/jmkjlin';
+  const CONTACT_WECHAT = 'The666TH';
+
+  function toast(msg) {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    document.getElementById('toast-root').appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+  function setPayStep(n) {
+    document.querySelectorAll('.pay-step').forEach(el => {
+      const s = Number(el.dataset.step);
+      el.classList.toggle('active', s === n);
+      el.classList.toggle('done', s < n);
+    });
+  }
+
+  function setNetwork(n) {
+    network = n;
+    document.querySelectorAll('.net-btn').forEach(b => {
+      const on = b.dataset.net === n;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    const cfg = CryptoMallPay.NETWORKS[n] || {};
+    document.getElementById('net-label').textContent = tr('net.' + n, cfg.label || n);
+    const addr = CryptoMallPay.getAddress(n);
+    const warn = document.getElementById('net-warn');
+    if (!addr) {
+      document.getElementById('pay-addr').textContent = tr('pay.addr_missing');
+      warn.textContent = tr('pay.addr_missing_warn');
+      warn.classList.remove('hidden');
+      document.getElementById('btn-copy-addr').disabled = true;
+    } else {
+      document.getElementById('pay-addr').textContent = addr;
+      warn.classList.add('hidden');
+      document.getElementById('btn-copy-addr').disabled = false;
+    }
+  }
+
+  function itemIsContact(i) {
+    return !!(i.contact_for_price || i.price_usdt === null || i.price_usdt === undefined || i.price_usdt === '?' || i.price_usdt === '');
+  }
+
+  function renderOrder() {
+    order = CryptoMallPay.loadPending();
+    if (!order || !order.items || !order.items.length) {
+      location.replace('index.html');
+      return;
+    }
+    document.getElementById('order-id').textContent = order.orderId;
+
+    const hasContact = !!(order.contactForPrice || order.items.some(itemIsContact));
+    const numericTotal = order.items.reduce((s, i) => {
+      if (itemIsContact(i)) return s;
+      return s + (Number(i.price_usdt) || 0) * (i.qty || 1);
+    }, 0);
+
+    let amountLabel;
+    if (hasContact && numericTotal === 0) amountLabel = '888 USDT';
+    else if (hasContact) amountLabel = numericTotal + ' + 888 USDT';
+    else amountLabel = (order.amountUsdt != null ? order.amountUsdt : numericTotal) + ' USDT';
+
+    // Never show 0/NaN for pure contact
+    if (amountLabel === '0 USDT' && hasContact) amountLabel = '888 USDT';
+    if (String(amountLabel).includes('NaN')) amountLabel = '888 USDT';
+
+    document.getElementById('amount').textContent = amountLabel;
+    const sub = document.querySelector('.pay-amount-sub');
+    if (sub) {
+      sub.textContent = hasContact
+        ? tr('pay.amount_sub_q')
+        : tr('pay.amount_sub_ok');
+    }
+    const hintAmt = document.getElementById('hint-amt');
+    if (hintAmt) hintAmt.textContent = amountLabel;
+
+    document.getElementById('order-items').innerHTML = order.items.map(i => {
+      const contact = itemIsContact(i);
+      const priceTxt = contact ? '888 USDT' : ((Number(i.price_usdt) || 0) + ' USDT');
+      return `
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+        <span class="logo-circle" style="width:40px;height:40px"><img src="${esc(i.logo||'assets/logo.jpg')}" onerror="this.src='assets/logo.jpg'" /></span>
+        <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(pn(i))}</span>
+        <span style="color:var(--price);font-size:12px;flex-shrink:0">${priceTxt} ×${i.qty||1}</span>
+      </div>`;
+    }).join('');
+
+    // Contact-for-price UI: emphasize human support; hide transfer/verify when pure ?
+    const panelTransfer = document.getElementById('panel-transfer');
+    const panelVerify = document.getElementById('panel-verify');
+    let contactPanel = document.getElementById('panel-contact-price');
+    if (!contactPanel) {
+      contactPanel = document.createElement('div');
+      contactPanel.id = 'panel-contact-price';
+      contactPanel.className = 'panel';
+      const amountPanel = document.querySelector('.panel');
+      if (amountPanel && amountPanel.nextSibling) {
+        amountPanel.parentNode.insertBefore(contactPanel, amountPanel.nextSibling);
+      } else {
+        document.querySelector('main').appendChild(contactPanel);
+      }
+    }
+    contactPanel.innerHTML = `
+      <div class="panel-title">${tr('pay.contact_title')}</div>
+      <p class="hint">${tr('pay.contact_hint')}</p>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+        <a href="${CONTACT_TG}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;border-radius:12px;min-height:48px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center">${tr('inquire.cta')}</a>
+        <a href="${CONTACT_X}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="width:100%;border-radius:12px;min-height:44px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center">X @jmkjlin</a>
+        <button type="button" id="btn-copy-wechat-pay" class="btn btn-ghost" style="width:100%;border-radius:12px;min-height:44px">${tr('pay.copy_wx')}</button>
+      </div>
+      <p class="warn" style="margin-top:12px">${tr('pay.contact_warn')}</p>`;
+    const wxPayBtn = document.getElementById('btn-copy-wechat-pay');
+    if (wxPayBtn) wxPayBtn.onclick = () => copyText(CONTACT_WECHAT);
+
+    if (hasContact && numericTotal === 0) {
+      // Pure inquiry — hide transfer & verify
+      if (panelTransfer) panelTransfer.classList.add('hidden');
+      if (panelVerify) panelVerify.classList.add('hidden');
+      contactPanel.classList.remove('hidden');
+      setPayStep(1);
+    } else if (hasContact) {
+      // Mixed cart — show contact notice but still allow paying numeric portion carefully
+      contactPanel.classList.remove('hidden');
+      if (panelTransfer) panelTransfer.classList.remove('hidden');
+      if (panelVerify) panelVerify.classList.remove('hidden');
+      if (hintAmt) hintAmt.textContent = tr('pay.hint_mixed', { n: numericTotal });
+    } else {
+      contactPanel.classList.add('hidden');
+      if (panelTransfer) panelTransfer.classList.remove('hidden');
+      if (panelVerify) panelVerify.classList.remove('hidden');
+    }
+  }
+
+  async function copyText(t) {
+    try { await navigator.clipboard.writeText(t); toast(tr('toast.copied')); }
+    catch {
+      const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove(); toast(tr('toast.copied'));
+    }
+  }
+
+  async function onVerify() {
+    if (!order) return;
+    if (order.contactForPrice && (order.amountUsdt === null || order.amountUsdt === undefined)) {
+      toast(tr('toast.need_price'));
+      return;
+    }
+    setPayStep(3);
+    const err = document.getElementById('err');
+    const ok = document.getElementById('ok');
+    err.classList.add('hidden'); ok.classList.add('hidden');
+    const tx = document.getElementById('tx-hash').value.trim();
+    const btn = document.getElementById('btn-verify');
+    btn.disabled = true;
+    document.getElementById('btn-label').textContent = tr('pay.verifying');
+    document.getElementById('btn-spin').classList.remove('hidden');
+    try {
+      const amount = order.amountUsdt;
+      if (amount === null || amount === undefined || !Number.isFinite(Number(amount))) {
+        throw new Error(tr('pay.no_auto'));
+      }
+      const result = await CryptoMallPay.verifyTxHash({
+        network,
+        txHash: tx,
+        amountUsdt: amount,
+      });
+      const verified = {
+        ...order,
+        network,
+        txHash: result.txHash,
+        explorer: result.explorer,
+        verifiedAt: Date.now(),
+        merchant: CryptoMallPay.MERCHANT,
+      };
+      CryptoMallPay.saveVerified(verified);
+      ok.textContent = tr('pay.ok');
+      ok.classList.remove('hidden');
+      toast(tr('toast.paid'));
+      setTimeout(() => { location.href = 'contact.html?order=' + encodeURIComponent(order.orderId); }, 600);
+    } catch (e) {
+      err.textContent = te(e.message);
+      err.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      document.getElementById('btn-label').textContent = tr('pay.verify');
+      document.getElementById('btn-spin').classList.add('hidden');
+    }
+  }
+
+  renderOrder();
+  setNetwork('BEP20');
+  setPayStep(2);
+  document.addEventListener('mall-langchange', function () {
+    if (window.CryptoMallI18n) CryptoMallI18n.apply();
+    if (order) renderOrder();
+    setNetwork(network);
+  });
+  document.querySelectorAll('.net-btn').forEach(b => b.addEventListener('click', () => { setNetwork(b.dataset.net); setPayStep(2); }));
+  const txInput = document.getElementById('tx-hash');
+  if (txInput) txInput.addEventListener('focus', () => setPayStep(3));
+  document.getElementById('btn-copy-addr').onclick = () => { const a=CryptoMallPay.getAddress(network); if(a) copyText(a); else toast(tr('toast.addr_missing')); };
+  document.getElementById('btn-copy-oid').onclick = () => copyText(order.orderId);
+  document.getElementById('btn-verify').onclick = onVerify;
+
+  </script>
+</body>
+</html>

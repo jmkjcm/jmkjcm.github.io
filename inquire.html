@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script>document.documentElement.setAttribute('data-region-pending','1');</script>
+  <style>html[data-region-pending] body{visibility:hidden!important}</style>
+  <script src="assets/region-gate.js?v=20261107v57"></script>
+  <script src="assets/theme.js?v=20261107v57"></script>
+  <script src="assets/i18n.js?v=20261107v57"></script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title data-i18n="title.inquire">询价确认 · 加密货币商城</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/app.css?v=20261107v57" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap inner" style="max-width:520px">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <a href="index.html" class="back-link" data-i18n="nav.back">← 返回</a>
+        <div class="page-title" data-i18n="inquire.page">询价确认</div>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="lang-switch" id="btn-lang" aria-label="语言">
+          <span data-lang-mark="zh">中文</span><span class="lang-switch-sep" aria-hidden="true">/</span><span data-lang-mark="en">EN</span>
+        </button>
+        <a href="https://t.me/AJSAASJ" target="_blank" rel="noopener noreferrer" class="btn-support" data-i18n-title="nav.support_title" title="Telegram 人工客服">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          <span class="support-label" data-i18n="nav.support">人工客服</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap page-main inquire-page" style="max-width:520px;padding-top:20px">
+    <section class="inquire-intro">
+      <p class="inquire-kicker" data-i18n="inquire.page">询价确认</p>
+      <h1 data-i18n="inquire.h1">联系客服确认价格</h1>
+      <p class="inquire-lead" data-i18n="inquire.lead">该业务需联系人工客服确认价格后再付款，当前无需转账。</p>
+    </section>
+
+    <div id="empty" class="panel hidden">
+      <p style="margin:0 0 14px;font-size:14px;color:var(--text-secondary);line-height:1.6" data-i18n="inquire.empty">未找到询价业务，请返回商城重新选择。</p>
+      <a href="index.html" class="btn btn-primary" style="border-radius:12px;padding:12px 20px;text-decoration:none" data-i18n="nav.home">回商城</a>
+    </div>
+
+    <div id="content" class="inquire-content hidden">
+      <section class="panel inquire-biz" data-i18n-aria="inquire.biz" aria-label="询价业务">
+        <div id="inquire-items"></div>
+        <div class="inquire-ref">
+          <span class="inquire-ref-label" data-i18n="inquire.ref">参考报价</span>
+          <strong class="inquire-ref-value">888 USDT</strong>
+          <span class="inquire-ref-note" data-i18n="inquire.ref_note">参考报价，最终以客服确认为准</span>
+        </div>
+      </section>
+
+      <p class="inquire-hint" data-i18n="inquire.hint">请通过下方方式联系客服，告知业务名称。价格确认后，再按确认金额付款。</p>
+      <p class="inquire-warn" data-i18n="inquire.warn">请勿按参考报价自行转账。</p>
+
+      <a href="https://t.me/AJSAASJ" target="_blank" rel="noopener noreferrer" class="btn btn-primary inquire-cta" data-i18n="inquire.cta">Telegram 人工客服</a>
+
+      <div class="inquire-contacts">
+        <a href="https://t.me/AJSAASJ" target="_blank" rel="noopener noreferrer" class="contact-card">
+          <div class="contact-ico ico-tg">TG</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700">Telegram</div>
+            <div style="color:#0369a1;font-size:13px">@AJSAASJ</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px" data-i18n="inquire.open_chat">点击打开对话</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:18px">→</span>
+        </a>
+        <a href="https://x.com/jmkjlin" target="_blank" rel="noopener noreferrer" class="contact-card">
+          <div class="contact-ico ico-x">𝕏</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700">X</div>
+            <div style="color:var(--text);font-size:13px">@jmkjlin</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px" data-i18n="inquire.open_x">点击打开主页</div>
+          </div>
+          <span style="color:var(--text-muted);font-size:18px">→</span>
+        </a>
+        <div class="contact-card">
+          <div class="contact-ico ico-wx" data-i18n="inquire.wx_label">微信</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700" data-i18n="inquire.wx_label">微信</div>
+            <div class="mono" style="color:#15803d;font-size:13px">The666TH</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:2px" data-i18n="inquire.wx_hint">复制微信号添加好友</div>
+          </div>
+          <button type="button" id="btn-copy-wx" class="btn btn-primary btn-sm" data-i18n="pay.copy">复制</button>
+        </div>
+      </div>
+
+      <button type="button" id="btn-copy-summary" class="btn btn-ghost inquire-copy" data-i18n="inquire.copy_summary">复制询价摘要</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap inner" style="max-width:520px">
+      <div class="footer-brand">加密科技传媒有限公司</div>
+      <div class="socials" data-i18n-aria="nav.contacts" aria-label="联系方式">
+        <a href="https://x.com/jmkjlin" target="_blank" rel="noopener noreferrer" class="social" title="X @jmkjlin" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.849L1.254 2.25H8.08l4.259 5.672L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+        </a>
+        <a href="https://t.me/JMKJCM" target="_blank" rel="noopener noreferrer" class="social" title="Telegram @JMKJCM" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <button type="button" id="btn-footer-wechat" class="social" data-i18n-title="wx.footer_title" data-i18n-aria="wx.aria" title="微信 The666TH（点击复制）" aria-label="微信">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.934 1.942-6.515 1.827-1.618 4.37-2.225 6.652-1.732-.857-3.766-4.447-6.595-8.505-6.595zm-3.57 5.622a1.042 1.042 0 0 1 0-2.083 1.042 1.042 0 0 1 0 2.083zm6.978 0a1.042 1.042 0 1 1 0-2.083 1.042 1.042 0 0 1 0 2.083zM24 14.3c0-3.405-3.272-6.168-7.288-6.168-4.017 0-7.29 2.763-7.29 6.168s3.273 6.168 7.29 6.168a8.69 8.69 0 0 0 2.446-.352.74.74 0 0 1 .613.083l1.632.955a.28.28 0 0 0 .143.046c.138 0 .25-.112.25-.25 0-.06-.025-.12-.041-.18l-.334-1.27a.506.506 0 0 1 .182-.57C22.994 17.9 24 16.23 24 14.3zm-9.943-1.486a.893.893 0 1 1 0-1.786.893.893 0 0 1 0 1.786zm5.041 0a.893.893 0 1 1 0-1.786.893.893 0 0 1 0 1.786z"/></svg>
+        </button>
+      </div>
+      <p style="margin:0 0 8px"><a href="terms.html" data-i18n="nav.terms">服务条款</a></p>
+      <p style="margin:0;color:#666666">© <span id="year"></span> 加密科技传媒</p>
+    </div>
+  </footer>
+
+  <div id="toast-root"></div>
+  <script src="assets/verify.js?v=20261107v57"></script>
+  <script>
+  const CONTACT_TG = 'https://t.me/AJSAASJ';
+  const CONTACT_WECHAT = 'The666TH';
+  let inquireItems = [];
+
+  function tr(key, vars) {
+    return (window.CryptoMallI18n && CryptoMallI18n.t) ? CryptoMallI18n.t(key, vars) : (typeof vars === 'string' ? vars : key);
+  }
+  function pn(item) {
+    if (!item) return '';
+    return tr('prod.' + item.id, item.name || item.id);
+  }
+  function toast(msg) {
+    const el = document.createElement('div');
+    el.className = 'toast';
+    el.textContent = msg;
+    document.getElementById('toast-root').appendChild(el);
+    setTimeout(() => el.remove(), 2600);
+  }
+  function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  async function copyText(text, okMsg) {
+    try { await navigator.clipboard.writeText(text); toast(okMsg || (window.CryptoMallI18n ? CryptoMallI18n.t('toast.copied') : '已复制')); }
+    catch {
+      const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove(); toast(okMsg || (window.CryptoMallI18n ? CryptoMallI18n.t('toast.copied') : '已复制'));
+    }
+  }
+  function summaryText() {
+    const sep = (window.CryptoMallI18n && CryptoMallI18n.lang === 'en') ? ', ' : '、';
+    const names = inquireItems.map(i => pn(i) + (i.qty && i.qty > 1 ? ' ×' + i.qty : '')).join(sep);
+    return [tr('inquire.summary_title'), tr('inquire.summary_biz') + names, tr('inquire.summary_ref')].join('\n');
+  }
+  async function resolveItems() {
+    const params = new URLSearchParams(location.search);
+    const qOrder = params.get('order');
+    const qId = params.get('id');
+    const pending = (window.CryptoMallPay && CryptoMallPay.loadPending()) || null;
+    if (pending && pending.items && pending.items.length && pending.contactForPrice && (!qOrder || pending.orderId === qOrder)) {
+      return pending.items;
+    }
+    if (!qId) return [];
+    const catalog = await (await fetch('products.json?v=20261107v57')).json();
+    const byId = Object.fromEntries((catalog.products || []).map(p => [p.id, p]));
+    const cats = Object.fromEntries((catalog.categories || []).map(c => [c.id, c.name]));
+    return qId.split(',').map(id => byId[id]).filter(Boolean).map(p => ({
+      id: p.id,
+      name: p.name,
+      logo: p.logo,
+      qty: 1,
+      category: p.category,
+      category_name: cats[p.category] || ''
+    }));
+  }
+  function renderItems(items, catalog) {
+    const cats = {};
+    if (catalog && catalog.categories) {
+      catalog.categories.forEach(c => { cats[c.id] = c.name; });
+    }
+    document.getElementById('inquire-items').innerHTML = items.map(i => {
+      const raw = i.category_name || cats[i.category] || '';
+      const meta = i.category ? tr('cat.' + i.category, raw) : raw;
+      return `<div class="inquire-item-row">
+        <span class="logo-circle"><img src="${esc(i.logo || 'assets/logo.jpg')}" alt="" onerror="this.src='assets/logo.jpg'" /></span>
+        <div class="inquire-item-copy">
+          <div class="inquire-item-name">${esc(pn(i))}</div>
+          ${meta ? `<div class="inquire-item-meta">${esc(meta)}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  (async function init() {
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('btn-footer-wechat').onclick = () => copyText(CONTACT_WECHAT, tr('toast.wechat'));
+    let items = [];
+    let catalog = null;
+    try {
+      items = await resolveItems();
+      catalog = await (await fetch('products.json?v=20261107v57')).json();
+    } catch (e) {}
+    if (!items.length) {
+      document.getElementById('empty').classList.remove('hidden');
+      return;
+    }
+    inquireItems = items;
+    renderItems(items, catalog);
+    document.getElementById('content').classList.remove('hidden');
+    document.getElementById('btn-copy-wx').onclick = () => copyText(CONTACT_WECHAT, tr('toast.wechat'));
+    document.getElementById('btn-copy-summary').onclick = () => copyText(summaryText(), tr('toast.summary'));
+    document.addEventListener('mall-langchange', function () {
+      if (window.CryptoMallI18n) CryptoMallI18n.apply();
+      if (inquireItems.length) renderItems(inquireItems, catalog);
+    });
+  })();
+  </script>
+</body>
+</html>
