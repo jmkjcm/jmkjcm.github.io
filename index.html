@@ -3,24 +3,24 @@
 <head>
   <script>document.documentElement.setAttribute('data-region-pending','1');</script>
   <style>html[data-region-pending] body{visibility:hidden!important}</style>
-  <script src="assets/region-gate.js?v=20261107v60"></script>
-  <script src="assets/theme.js?v=20261107v60"></script>
-  <script src="assets/i18n.js?v=20261107v60"></script>
+  <script src="assets/region-gate.js?v=20261127v61"></script>
+  <script src="assets/theme.js?v=20261127v61"></script>
+  <script src="assets/i18n.js?v=20261127v61"></script>
 
   <meta charset="UTF-8" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#f7f5f1" />
   <meta name="description" content="加密货币商城 · 加密科技传媒：头像信息收录、热搜和广告、交易所上现货、上合约、Alpha、审计、宣发、开发、其他业务。USDT 定价 / 询价，付款验证或联系人工客服。" />
   <title data-i18n="title.index">加密货币商城 · 加密科技传媒</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=20261107v60" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=20261107v60" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20261107v60" />
-  <link rel="shortcut icon" href="favicon.ico?v=20261107v60" />
-  <link rel="stylesheet" href="assets/app.css?v=20261107v60" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=20261127v61" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=20261127v61" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20261127v61" />
+  <link rel="shortcut icon" href="favicon.ico?v=20261127v61" />
+  <link rel="stylesheet" href="assets/app.css?v=20261127v61" />
 </head>
 <body>
   <header class="site-header">
@@ -51,7 +51,14 @@
     <div class="hero">
       <div class="min-w-0">
         <h1 data-i18n="hero.title">加密货币商城</h1>
-        <p data-i18n="hero.tagline">购买流程 - 选择业务 - 付USDT - 有任何问题直接联系人工客服</p>
+        <div class="hero-flow" id="hero-flow">
+          <p class="hero-kicker">购买流程</p>
+          <ol class="hero-steps">
+            <li>选择业务</li>
+            <li>付USDT</li>
+            <li>有任何问题直接联系人工客服</li>
+          </ol>
+        </div>
       </div>
     </div>
 
@@ -144,7 +151,7 @@
 
   <div id="toast-root"></div>
 
-  <script src="assets/verify.js?v=20261107v60"></script>
+  <script src="assets/verify.js?v=20261127v61"></script>
   <script>
   function tr(key, vars) {
     return (window.CryptoMallI18n && CryptoMallI18n.t) ? CryptoMallI18n.t(key, vars) : (typeof vars === 'string' ? vars : key);
@@ -260,6 +267,12 @@
     location.href = 'pay.html?order=' + encodeURIComponent(order.orderId);
   }
 
+  function inquireOne(id) {
+    const p = CATALOG.products.find(x => x.id === id);
+    if (!p) return;
+    location.href = 'inquire.html?id=' + encodeURIComponent(p.id);
+  }
+
   function buyOne(id) {
     const p = CATALOG.products.find(x => x.id === id);
     if (!p) return;
@@ -347,7 +360,13 @@
 
   function productRowHtml(p, compact) {
     const priceLabel = formatPrice(p);
-    const buyLabel = isContactPrice(p) ? tr('btn.inquire') : tr('btn.buy');
+    const buyLabel = escapeHtml(tr('btn.buy'));
+    const inquireLabel = escapeHtml(tr('btn.inquire'));
+    const actionBtns = `
+          <div class="action-btns">
+            <button type="button" data-inquire="${p.id}" class="btn btn-ghost btn-xs btn-inquire" aria-label="${inquireLabel}">${inquireLabel}</button>
+            <button type="button" data-buy="${p.id}" class="btn btn-primary btn-xs btn-buy" aria-label="${buyLabel}">${buyLabel}</button>
+          </div>`;
     if (compact) {
       return `
       <article class="hot-card">
@@ -364,9 +383,7 @@
         </div>
         <div class="hot-card-bottom">
           <div class="price">${priceLabel}</div>
-          <div class="action-btns">
-            <button type="button" data-buy="${p.id}" class="btn btn-primary btn-xs btn-buy" aria-label="${buyLabel}">${buyLabel}</button>
-          </div>
+          ${actionBtns}
         </div>
       </article>`;
     }
@@ -383,11 +400,11 @@
           <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(p.speed) : ''}</div>
         </div>
         <div class="row-actions">
-          <div class="price">${priceLabel}</div>
-          <div class="action-btns">
+          <div class="row-actions-top">
+            <div class="price">${priceLabel}</div>
             <button type="button" data-cart="${p.id}" class="btn btn-ghost btn-xs btn-add" aria-label="${escapeHtml(tr('btn.add_aria'))}">${escapeHtml(tr('btn.add'))}</button>
-            <button type="button" data-buy="${p.id}" class="btn btn-primary btn-xs btn-buy" aria-label="${buyLabel}">${buyLabel}</button>
           </div>
+          ${actionBtns}
         </div>
       </article>`;
   }
@@ -486,9 +503,25 @@
     document.getElementById('cart-overlay').classList.remove('open');
   }
 
+  function renderHeroFlow() {
+    const el = document.getElementById('hero-flow');
+    if (!el) return;
+    const raw = tr('hero.tagline');
+    const parts = String(raw).split(/\s[-–—]\s/).map(s => s.trim()).filter(Boolean);
+    if (parts.length < 2) {
+      el.innerHTML = '<p class="hero-kicker">' + escapeHtml(raw) + '</p>';
+      return;
+    }
+    const kicker = parts[0];
+    const steps = parts.slice(1);
+    el.innerHTML = '<p class="hero-kicker">' + escapeHtml(kicker) + '</p>' +
+      '<ol class="hero-steps">' + steps.map(s => '<li>' + escapeHtml(s) + '</li>').join('') + '</ol>';
+  }
+
   async function init() {
+    renderHeroFlow();
     document.getElementById('year').textContent = new Date().getFullYear();
-    CATALOG = await (await fetch('products.json?v=20261107v60')).json();
+    CATALOG = await (await fetch('products.json?v=20261127v61')).json();
     renderTabs();
     renderProducts();
     updateCartUI();
@@ -521,6 +554,8 @@
       if (e.key === 'Escape') closeCategorySheet();
     });
     document.getElementById('product-grid').addEventListener('click', e => {
+      const inquire = e.target.closest('[data-inquire]');
+      if (inquire) { inquireOne(inquire.dataset.inquire); return; }
       const buy = e.target.closest('[data-buy]');
       if (buy) { buyOne(buy.dataset.buy); return; }
       const add = e.target.closest('[data-cart]');
@@ -557,6 +592,7 @@
     sync();
   }
   document.addEventListener('mall-langchange', function () {
+    renderHeroFlow();
     if (CATALOG && CATALOG.products) {
       renderTabs();
       renderProducts();
@@ -564,6 +600,7 @@
     }
     if (window.CryptoMallI18n) CryptoMallI18n.apply();
   });
+  renderHeroFlow();
   init().catch(() => toast(tr('toast.catalog_fail')));
 
   </script>

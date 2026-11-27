@@ -1,4 +1,4 @@
-/* Auto day / night theme: X Premium Lights Out at night, luxury white by day. No manual toggle. */
+/* Auto day / night theme: warm off-white by day, lifted dark surfaces at night. No manual toggle. */
 (function () {
   var DAY_START = 6;
   var DAY_END = 18;
@@ -12,7 +12,7 @@
     var dark = !isDay(new Date());
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', dark ? '#000000' : '#ffffff');
+    if (meta) meta.setAttribute('content', dark ? '#111111' : '#f7f5f1');
   }
 
   function msUntilNextBoundary() {
