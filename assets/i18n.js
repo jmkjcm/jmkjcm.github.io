@@ -15,9 +15,9 @@
       'nav.support_title': 'Telegram 人工客服',
       'nav.cart': '购物车',
       'nav.close': '关闭',
-      'nav.back': '← 返回',
+      'nav.back': '← 返回商城',
       'nav.back_mall': '← 返回商城',
-      'nav.home': '回商城',
+      'nav.home': '返回商城',
       'nav.terms': '服务条款',
       'nav.contacts': '联系方式',
       'nav.lang': '语言',
@@ -49,6 +49,11 @@
       'section.more': '更多业务',
       'section.all': '全部业务',
       'tag.hot': '热门',
+      'speed.咨询': '咨询',
+      'speed.火爆': '火爆',
+      'speed.秒上': '秒上',
+      'speed.秒级': '秒级',
+      'speed.在线': '在线',
       'btn.inquire': '询价',
       'btn.buy': '购买',
       'btn.add': '加购',
@@ -176,7 +181,7 @@
       'nav.support_title': 'Telegram support',
       'nav.cart': 'Cart',
       'nav.close': 'Close',
-      'nav.back': '← Back',
+      'nav.back': '← Back to mall',
       'nav.back_mall': '← Back to mall',
       'nav.home': 'Back to mall',
       'nav.terms': 'Terms of Service',
@@ -210,6 +215,11 @@
       'section.more': 'More services',
       'section.all': 'All services',
       'tag.hot': 'Featured',
+      'speed.咨询': 'Inquire',
+      'speed.火爆': 'Hot',
+      'speed.秒上': 'Instant',
+      'speed.秒级': 'In seconds',
+      'speed.在线': 'Online',
       'btn.inquire': 'Inquire',
       'btn.buy': 'Buy',
       'btn.add': 'Add',
@@ -564,6 +574,11 @@
     return t('prod.' + id, fallback || id);
   }
 
+  function speedLabel(speed, fallback) {
+    if (!speed) return fallback || '';
+    return t('speed.' + speed, fallback || speed);
+  }
+
   global.CryptoMallI18n = {
     t: t,
     error: translateError,
@@ -571,6 +586,7 @@
     setLang: setLang,
     onRegion: onRegion,
     productName: productName,
+    speedLabel: speedLabel,
     get lang() { return lang; }
   };
   global.t = t;

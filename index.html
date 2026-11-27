@@ -3,9 +3,9 @@
 <head>
   <script>document.documentElement.setAttribute('data-region-pending','1');</script>
   <style>html[data-region-pending] body{visibility:hidden!important}</style>
-  <script src="assets/region-gate.js?v=20261127v62"></script>
-  <script src="assets/theme.js?v=20261127v62"></script>
-  <script src="assets/i18n.js?v=20261127v62"></script>
+  <script src="assets/region-gate.js?v=20261127v63"></script>
+  <script src="assets/theme.js?v=20261127v63"></script>
+  <script src="assets/i18n.js?v=20261127v63"></script>
 
   <meta charset="UTF-8" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -16,11 +16,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=20261127v62" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=20261127v62" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20261127v62" />
-  <link rel="shortcut icon" href="favicon.ico?v=20261127v62" />
-  <link rel="stylesheet" href="assets/app.css?v=20261127v62" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=20261127v63" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=20261127v63" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20261127v63" />
+  <link rel="shortcut icon" href="favicon.ico?v=20261127v63" />
+  <link rel="stylesheet" href="assets/app.css?v=20261127v63" />
 </head>
 <body>
   <header class="site-header">
@@ -151,7 +151,7 @@
 
   <div id="toast-root"></div>
 
-  <script src="assets/verify.js?v=20261127v62"></script>
+  <script src="assets/verify.js?v=20261127v63"></script>
   <script>
   function tr(key, vars) {
     return (window.CryptoMallI18n && CryptoMallI18n.t) ? CryptoMallI18n.t(key, vars) : (typeof vars === 'string' ? vars : key);
@@ -189,6 +189,11 @@
   }
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function speedLabel(speed) {
+    if (!speed) return '';
+    if (window.CryptoMallI18n && CryptoMallI18n.speedLabel) return CryptoMallI18n.speedLabel(speed);
+    return tr('speed.' + speed, speed);
   }
   function catName(id) {
     if (!id) return '';
@@ -379,7 +384,7 @@
             <div class="row-name">
               <span class="name">${escapeHtml(pn(p))}</span>
             </div>
-            <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(p.speed) : ''}</div>
+            <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(speedLabel(p.speed)) : ''}</div>
           </div>
         </div>
         <div class="hot-card-bottom">
@@ -401,7 +406,7 @@
             <span class="name">${escapeHtml(pn(p))}</span>
             ${p.hot ? '<span class="hot-tag">' + escapeHtml(tr('tag.hot')) + '</span>' : ''}
           </div>
-          <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(p.speed) : ''}</div>
+          <div class="row-meta">${escapeHtml(catName(p.category))}${p.speed ? ' · ' + escapeHtml(speedLabel(p.speed)) : ''}</div>
         </div>
         <div class="row-actions">
           <div class="row-actions-top">
@@ -525,7 +530,7 @@
   async function init() {
     renderHeroFlow();
     document.getElementById('year').textContent = new Date().getFullYear();
-    CATALOG = await (await fetch('products.json?v=20261127v62')).json();
+    CATALOG = await (await fetch('products.json?v=20261127v63')).json();
     renderTabs();
     renderProducts();
     updateCartUI();
@@ -535,6 +540,7 @@
       if (!btn) return;
       activeCategory = btn.dataset.cat;
       renderTabs(); renderProducts();
+      revealCatalog();
     });
     document.getElementById('category-trigger').addEventListener('click', openCategorySheet);
     document.getElementById('category-overlay').addEventListener('click', closeCategorySheet);
@@ -546,6 +552,7 @@
       renderTabs();
       renderProducts();
       closeCategorySheet();
+      revealCatalog();
     });
     document.getElementById('hot-cats-list').addEventListener('click', e => {
       const btn = e.target.closest('[data-hot-cat]');
@@ -553,6 +560,7 @@
       activeCategory = btn.dataset.hotCat;
       renderTabs();
       renderProducts();
+      revealCatalog();
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeCategorySheet();
@@ -585,14 +593,31 @@
     document.getElementById('btn-footer-wechat').onclick = () => copyText('The666TH', tr('toast.wechat'));
     setupHotCatsCollapse();
   }
+  function tabsChromeHeight() {
+    const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 60;
+    const bar = document.querySelector('.tabs-bar');
+    const barH = bar ? bar.getBoundingClientRect().height : 0;
+    return headerH + barH;
+  }
+  function revealCatalog() {
+    const anchor = document.querySelector('.meta-row') || document.getElementById('product-grid');
+    if (!anchor) return;
+    const top = Math.max(0, anchor.getBoundingClientRect().top + window.scrollY - tabsChromeHeight() - 8);
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    if (y > top + 2) {
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }
   function setupHotCatsCollapse() {
     const bar = document.querySelector('.tabs-bar');
     if (!bar) return;
+    const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 60;
     const sync = () => {
-      const y = window.scrollY || document.documentElement.scrollTop || 0;
-      bar.classList.toggle('is-collapsed', y > 8);
+      const stuck = bar.getBoundingClientRect().top <= headerH + 1;
+      bar.classList.toggle('is-collapsed', stuck);
     };
     window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
     sync();
   }
   document.addEventListener('mall-langchange', function () {
